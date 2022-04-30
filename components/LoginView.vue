@@ -1,17 +1,16 @@
 <template>
   <div class="flex items-center justify-center">
     <form class="w-full max-w-sm">
-      <div class="md:flex md:items-center mb-6">
+      <div class="flex items-center mb-6">
         <form-field type="text" label="Username" v-model="username" />
       </div>
-      <div class="md:flex md:items-center mb-6">
-        <form-field type="password" label="password" v-model="password" />
+      <div class="flex items-center mb-6">
+        <form-field type="password" label="Password" v-model="password" />
       </div>
-      <div class="md:block md:items-center">
-        <div class="md:w-1/3"></div>
-        <div class="md:w-2/3">
+      <div class="w-full">
+        <div class="w-full">
           <form-button>
-            Sign Up
+            Log In
           </form-button>
         </div>
       </div>
