@@ -41,18 +41,13 @@
                                 </button>
                             </MenuItem>
                             <MenuItem v-slot="{ active }">
-                                <button
-                                    :class="[
-                                        active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                                        'group flex rounded-md items-center w-full px-2 py-2 text-sm',
-                                    ]"
-                                >
+                                <form-button @click="test">
                                     <DuplicateIcon
                                         :active="active"
                                         class="w-5 h-5 mr-2 text-violet-400"
                                         aria-hidden="true"
                                     />Duplicate
-                                </button>
+                                </form-button>
                             </MenuItem>
                         </div>
                         <div class="px-1 py-1">
@@ -109,21 +104,7 @@
     </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { ChevronDownIcon, ArchiveIcon, DuplicateIcon, CheckCircleIcon, AcademicCapIcon, ArrowLeftIcon } from '@heroicons/vue/solid'
-export default {
-    components: {
-        Menu,
-        MenuButton,
-        MenuItems,
-        MenuItem,
-        ChevronDownIcon,
-        ArchiveIcon,
-        DuplicateIcon,
-        CheckCircleIcon,
-        AcademicCapIcon,
-        ArrowLeftIcon,
-    },
-}
 </script>
