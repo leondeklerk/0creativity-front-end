@@ -24,5 +24,15 @@ export default defineNuxtConfig({
                 '@headlessui/vue', '@heroicons/vue/solid', '@heroicons/vue/outline', 'vue', 'pinia', 'ufo'
             ]
         }
-    }
+    },
+    components: {
+        dirs: [
+          '~/components',
+          {
+            path: '~/types',
+            extensions: ['ts'],
+            prefix: ''
+          }
+        ]
+      }
 });
