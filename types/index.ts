@@ -3,3 +3,10 @@ export interface Link {
     title: string
     url: any
 }
+
+export interface RegisterData {
+    userName: string,
+    password: string,
+    confirmPassword: string,
+    email: string
+}

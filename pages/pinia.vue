@@ -1,15 +1,14 @@
-<script  lang="ts">
+<script lang="ts">
 import { useCounter } from "~/store/counter";
 
 export default {
     setup() {
         const counter = useCounter();
         return {
-            counter,
-        }
-    },
-}
-
+            counter
+        };
+    }
+};
 </script>
 
 <template>
@@ -23,11 +22,10 @@ export default {
                 myRef: {{ counter.myRef }}
             </p>
 
-            <input class="text-black" type="text" v-model="counter.myRef" />
+            <input v-model="counter.myRef" class="text-black" type="text" />
             <br />
-            <input class="text-black" type="number" v-model="counter.n" />
+            <input v-model="counter.n" class="text-black" type="number" />
         </div>
         <button class="p-4 global-text" @click="counter.increment()">+1 number click</button>
     </div>
 </template>
-

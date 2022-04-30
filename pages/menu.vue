@@ -7,10 +7,7 @@
                         class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-black rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
                     >
                         Options
-                        <ChevronDownIcon
-                            class="w-5 h-5 ml-2 -mr-1 text-violet-200 hover:text-violet-100"
-                            aria-hidden="true"
-                        />
+                        <ChevronDownIcon class="w-5 h-5 ml-2 -mr-1 text-violet-200 hover:text-violet-100" aria-hidden="true" />
                     </MenuButton>
                 </div>
 
@@ -30,23 +27,17 @@
                                 <button
                                     :class="[
                                         active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                                        'group flex rounded-md items-center w-full px-2 py-2 text-sm',
+                                        'group flex rounded-md items-center w-full px-2 py-2 text-sm'
                                     ]"
                                 >
-                                    <AcademicCapIcon
-                                        :active="active"
-                                        class="w-5 h-5 mr-2 text-violet-400"
-                                        aria-hidden="true"
-                                    />Edit
+                                    <AcademicCapIcon :active="active" class="w-5 h-5 mr-2 text-violet-400" aria-hidden="true" />
+                                    Edit
                                 </button>
                             </MenuItem>
                             <MenuItem v-slot="{ active }">
                                 <form-button @click="test">
-                                    <DuplicateIcon
-                                        :active="active"
-                                        class="w-5 h-5 mr-2 text-violet-400"
-                                        aria-hidden="true"
-                                    />Duplicate
+                                    <DuplicateIcon :active="active" class="w-5 h-5 mr-2 text-violet-400" aria-hidden="true" />
+                                    Duplicate
                                 </form-button>
                             </MenuItem>
                         </div>
@@ -55,28 +46,22 @@
                                 <button
                                     :class="[
                                         active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                                        'group flex rounded-md items-center w-full px-2 py-2 text-sm',
+                                        'group flex rounded-md items-center w-full px-2 py-2 text-sm'
                                     ]"
                                 >
-                                    <ArchiveIcon
-                                        :active="active"
-                                        class="w-5 h-5 mr-2 text-violet-400"
-                                        aria-hidden="true"
-                                    />Archive
+                                    <ArchiveIcon :active="active" class="w-5 h-5 mr-2 text-violet-400" aria-hidden="true" />
+                                    Archive
                                 </button>
                             </MenuItem>
                             <MenuItem v-slot="{ active }">
                                 <button
                                     :class="[
                                         active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                                        'group flex rounded-md items-center w-full px-2 py-2 text-sm',
+                                        'group flex rounded-md items-center w-full px-2 py-2 text-sm'
                                     ]"
                                 >
-                                    <CheckCircleIcon
-                                        :active="active"
-                                        class="w-5 h-5 mr-2 text-violet-400"
-                                        aria-hidden="true"
-                                    />Move
+                                    <CheckCircleIcon :active="active" class="w-5 h-5 mr-2 text-violet-400" aria-hidden="true" />
+                                    Move
                                 </button>
                             </MenuItem>
                         </div>
@@ -86,14 +71,11 @@
                                 <button
                                     :class="[
                                         active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                                        'group flex rounded-md items-center w-full px-2 py-2 text-sm',
+                                        'group flex rounded-md items-center w-full px-2 py-2 text-sm'
                                     ]"
                                 >
-                                    <ArrowLeftIcon
-                                        :active="active"
-                                        class="w-5 h-5 mr-2 text-violet-400"
-                                        aria-hidden="true"
-                                    />Delete
+                                    <ArrowLeftIcon :active="active" class="w-5 h-5 mr-2 text-violet-400" aria-hidden="true" />
+                                    Delete
                                 </button>
                             </MenuItem>
                         </div>
@@ -105,6 +87,6 @@
 </template>
 
 <script setup lang="ts">
-import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
-import { ChevronDownIcon, ArchiveIcon, DuplicateIcon, CheckCircleIcon, AcademicCapIcon, ArrowLeftIcon } from '@heroicons/vue/solid'
+import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
+import { ChevronDownIcon, ArchiveIcon, DuplicateIcon, CheckCircleIcon, AcademicCapIcon, ArrowLeftIcon } from "@heroicons/vue/solid";
 </script>

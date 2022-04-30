@@ -1,4 +1,5 @@
 import { defineNuxtConfig } from "nuxt";
+import eslintPlugin from "vite-plugin-eslint"
 
 export default defineNuxtConfig({
     modules: [
@@ -23,7 +24,10 @@ export default defineNuxtConfig({
             include: [
                 '@headlessui/vue', '@heroicons/vue/solid', '@heroicons/vue/outline', 'vue', 'pinia', 'ufo'
             ]
-        }
+        },
+        plugins: [
+            eslintPlugin()
+        ]
     },
     components: {
         dirs: [
