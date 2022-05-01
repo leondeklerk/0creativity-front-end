@@ -1,6 +1,6 @@
 <template>
     <div class="bg-white h-screen">
-        <dark-nav-with-overlap title="Creating New Vacation">
+        <dark-nav-with-overlap v-if="profileData" :profile-data="profileData" title="Creating New Vacation">
             <section-heading-simple>Budget</section-heading-simple>
             <input-price-field />
             <!-- Why doesn't this show up? -->
@@ -10,4 +10,8 @@
     </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useAuthentication } from "~~/store/store";
+
+const profileData = ref(useAuthentication().profileData);
+</script>

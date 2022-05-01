@@ -41,16 +41,21 @@ function register() {
         confirmPassword: verifyPassword.value
     };
 
+    errors.value = [];
+
     postUnauthorized("https://localhost:5001/api/users/self-register", data)
-        .then((res: unknown): void => {
+        .then(async (res: Response) => {
+            const data = await res.json();
             // Success
             emit("action:registered");
         })
-        .catch((err: Response | null) => {
+        .catch(async (err: Response | null) => {
             if (err) {
-                if (err.status === 400) {
-                    if (err.errors) {
-                        err.errors.foreach((error) => errors.push(error));
+                if (err.status >= 400 && err.status <= 404) {
+                    const data = await err.json();
+                    console.log(data);
+                    if (data.errors) {
+                        Object.values(data.errors).forEach((items: string[]) => errors.value.push(items.join(", ")));
                     }
                 }
             }

@@ -4,7 +4,7 @@
             <div class="space-y-6">
                 <form-field v-model="email" type="text" label="E-mail" />
                 <form-field v-model="password" type="password" label="Password" />
-                <div v-for="(error, index) of errors" :key="index" class="flex items-center mb-6">
+                <div v-for="error in errors" :key="error" class="flex items-center mb-6">
                     <p>{{ error }}</p>
                 </div>
                 <div class="flex items-center justify-between">
@@ -25,7 +25,7 @@ const errors = ref<string[]>([]);
 
 const emit = defineEmits<{
     (e: "clicked:register"): void;
-    (e: "action:loggedIn"): void;
+    (e: "action:loggedIn", token: string): void;
 }>();
 
 function login() {
@@ -34,16 +34,22 @@ function login() {
         email: email.value
     };
 
+    errors.value = [];
+
     postUnauthorized("https://localhost:5001/api/tokens", data)
-        .then((res: Response) => {
+        .then(async (res: Response) => {
+            const data = await res.json();
+            const token = data.token;
+
             // Do a login
-            emit("action:loggedIn");
+            emit("action:loggedIn", token);
         })
-        .catch((err: Response | null) => {
+        .catch(async (err: Response | null) => {
             if (err) {
-                if (err.status === 400) {
-                    if (err.errors) {
-                        err.errors.foreach((error) => errors.push(error));
+                if (err.status >= 400 && err.status <= 404) {
+                    const data = await err.json();
+                    if (data.messages) {
+                        data.messages.forEach((error: string) => errors.value.push(error));
                     }
                 }
             }

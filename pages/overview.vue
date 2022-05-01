@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <dark-nav-with-overlap title="Vacation Planner">
+    <div v-if="authorized">
+        <dark-nav-with-overlap :profile-data="profileData" title="Vacation Planner">
             <div class="bg-white h-screen">
                 <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
                     <section-heading-simple>Your Vacations</section-heading-simple>
@@ -20,7 +20,7 @@
                                 <p class="text-sm text-gray-500">Hosted by you</p>
                             </div>
                         </div>
-                        <a class="group bg-white border border-dashed border-gray-300 rounded-lg overflow-hidden" href="/create">
+                        <a class="group bg-white border border-dashed border-gray-300 rounded-lg overflow-hidden" href="./create">
                             <div class="transition-all duration-200 p-7 space-y-2 hover:bg-gray-100">
                                 <div class="flex flex-auto items-center justify-center">
                                     <PlusCircleIcon class="h-7 w-7 mx-2 stroke-1 stroke-gray-400" />
@@ -56,6 +56,9 @@
 
 <script setup lang="ts">
 import { PlusCircleIcon } from "@heroicons/vue/outline";
+import { Ref } from "vue";
+import { useAuthentication } from "~~/store/store";
+import { ProfileData } from "~~/types";
 
 let idyv = 0;
 const yvYourVacations = ref([
@@ -68,4 +71,37 @@ const yvSharedVacations = ref([
     { id: idyv++, title: "Summer 2023", host: "My Friend", href: "#" },
     { id: idyv++, title: "Never 20XX", host: "Other Friend", href: "#" }
 ]);
+
+const authorized = ref(false);
+const profileData: Ref<ProfileData> = ref();
+
+const store = useAuthentication();
+
+onBeforeMount(() => {
+    if (store.token) {
+        getAuthorized("https://localhost:5001/api/personal/profile", store.token)
+            .then(async (res: Response) => {
+                const data = await res.json();
+                if (!data) {
+                    navigateTo({
+                        path: "/"
+                    });
+                }
+                profileData.value = data;
+                store.storeProfileData(data);
+                authorized.value = true;
+            })
+            .catch((err) => {
+                if (err) {
+                    navigateTo({
+                        path: "/"
+                    });
+                }
+            });
+    } else {
+        navigateTo({
+            path: "/"
+        });
+    }
+});
 </script>

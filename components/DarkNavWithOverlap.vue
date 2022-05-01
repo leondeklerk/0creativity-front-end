@@ -1,13 +1,4 @@
-<!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-    <!--
-    This example requires updating your template:
-
-    ```
-    <html class="h-full bg-gray-100">
-    <body class="h-full">
-    ```
-  -->
     <div class="min-h-full">
         <div class="bg-gray-800 pb-32">
             <Disclosure v-slot="{ open }" as="nav" class="bg-gray-800">
@@ -52,7 +43,7 @@
                                                 class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                                             >
                                                 <span class="sr-only">Open user menu</span>
-                                                <img class="h-8 w-8 rounded-full" :src="user.imageUrl" alt="" />
+                                                <img class="h-8 w-8 rounded-full" :src="props.profileData.imageUrl" alt="" />
                                             </MenuButton>
                                         </div>
                                         <transition
@@ -112,11 +103,11 @@
                     <div class="pt-4 pb-3 border-t border-gray-700">
                         <div class="flex items-center px-5">
                             <div class="flex-shrink-0">
-                                <img class="h-10 w-10 rounded-full" :src="user.imageUrl" alt="" />
+                                <img class="h-10 w-10 rounded-full" :src="props.profileData.imageUrl" alt="" />
                             </div>
                             <div class="ml-3">
-                                <div class="text-base font-medium leading-none text-white">{{ user.name }}</div>
-                                <div class="text-sm font-medium leading-none text-gray-400">{{ user.email }}</div>
+                                <div class="text-base font-medium leading-none text-white">{{ props.profileData.firstName }}</div>
+                                <div class="text-sm font-medium leading-none text-gray-400">{{ props.profileData.email }}</div>
                             </div>
                             <button
                                 type="button"
@@ -133,6 +124,7 @@
                                 as="a"
                                 :href="item.href"
                                 class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
+                                @click="onClick(item.href)"
                             >
                                 {{ item.name }}
                             </DisclosureButton>
@@ -142,7 +134,7 @@
             </Disclosure>
             <header class="py-10">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <h1 class="text-3xl font-bold text-white">{{ title || "Sample Text" }}</h1>
+                    <h1 class="text-3xl font-bold text-white">{{ props.title || "Sample Text" }}</h1>
                 </div>
             </header>
         </div>
@@ -164,49 +156,25 @@
 <script setup lang="ts">
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/vue/outline";
+import { useAuthentication } from "~~/store/store";
+import { ProfileData } from "~~/types";
 
-const user = {
-    name: "Tom Cook",
-    email: "tom@example.com",
-    imageUrl:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-};
-const navigation = [
-    { name: "Dashboard", href: "#", current: true },
-    { name: "Team", href: "#", current: false },
-    { name: "Projects", href: "#", current: false },
-    { name: "Calendar", href: "#", current: false },
-    { name: "Reports", href: "#", current: false }
-];
+const navigation = [{ name: "Overview", href: "#", current: true }];
 const userNavigation = [
     { name: "Your Profile", href: "#" },
-    { name: "Settings", href: "#" },
-    { name: "Sign out", href: "#" }
+    { name: "Sign out", href: "/" }
 ];
 
-const props = defineProps({
-    title: String
-});
+interface Props {
+    title: string;
+    profileData: ProfileData;
+}
 
-// export default {
-//   components: {
-//     Disclosure,
-//     DisclosureButton,
-//     DisclosurePanel,
-//     Menu,
-//     MenuButton,
-//     MenuItem,
-//     MenuItems,
-//     BellIcon,
-//     MenuIcon,
-//     XIcon,
-//   },
-//   setup() {
-//     return {
-//       user,
-//       navigation,
-//       userNavigation,
-//     }
-//   },
-// }
+const props = defineProps<Props>();
+
+function onClick(href: string) {
+    const store = useAuthentication();
+    store.storeToken("");
+    navigateTo(href);
+}
 </script>
