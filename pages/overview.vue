@@ -20,7 +20,7 @@
                                 <p class="text-sm text-gray-500">Hosted by you</p>
                             </div>
                         </div>
-                        <a class="group bg-white border border-dashed border-gray-300 rounded-lg overflow-hidden" href="/NewVacation">
+                        <a class="group bg-white border border-dashed border-gray-300 rounded-lg overflow-hidden" href="/create">
                             <div class="transition-all duration-200 p-7 space-y-2 hover:bg-gray-100">
                                 <div class="flex flex-auto items-center justify-center">
                                     <PlusCircleIcon class="h-7 w-7 mx-2 stroke-1 stroke-gray-400" />

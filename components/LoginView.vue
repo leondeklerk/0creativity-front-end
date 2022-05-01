@@ -25,6 +25,7 @@ const errors = ref<string[]>([]);
 
 const emit = defineEmits<{
     (e: "clicked:register"): void;
+    (e: "action:loggedIn"): void;
 }>();
 
 function login() {
@@ -36,6 +37,7 @@ function login() {
     postUnauthorized("https://localhost:5001/api/tokens", data)
         .then((res: Response) => {
             // Do a login
+            emit("action:loggedIn");
         })
         .catch((err: Response | null) => {
             if (err) {

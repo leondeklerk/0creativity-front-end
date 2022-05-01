@@ -29,6 +29,7 @@ const errors = ref<string[]>([]);
 
 const emit = defineEmits<{
     (e: "clicked:back"): void;
+    (e: "action:registered");
 }>();
 
 function register() {
@@ -43,6 +44,7 @@ function register() {
     postUnauthorized("https://localhost:5001/api/users/self-register", data)
         .then((res: unknown): void => {
             // Success
+            emit("action:registered");
         })
         .catch((err: Response | null) => {
             if (err) {
