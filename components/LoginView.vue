@@ -1,25 +1,15 @@
 <template>
-    <div class="flex items-center justify-center">
-        <div class="w-full max-w-sm">
-            <div class="flex items-center mb-6">
+    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+            <div class="space-y-6">
                 <form-field v-model="email" type="text" label="E-mail" />
-            </div>
-            <div class="flex items-center mb-6">
                 <form-field v-model="password" type="password" label="Password" />
-            </div>
-            <div v-for="(error, index) of errors" :key="index" class="flex items-center mb-6">
-                <p>{{ error }}</p>
-            </div>
-            <div class="flex items-center justify-between">
-                <div>
-                    <form-button @click="login">Log In</form-button>
+                <div v-for="(error, index) of errors" :key="index" class="flex items-center mb-6">
+                    <p>{{ error }}</p>
                 </div>
-                <div>
-                    <a
-                        class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker"
-                        href="#"
-                        @click="emit('clicked:register')"
-                    >
+                <div class="flex items-center justify-between">
+                    <form-button class="w-1/2" @click="login">Log In</form-button>
+                    <a class="w-1/2 text-center font-medium text-indigo-600 hover:text-indigo-500" href="#" @click="emit('clicked:register')">
                         Register
                     </a>
                 </div>
